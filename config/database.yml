@@ -1,0 +1,7 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: quiz8db
+  pool: 5
+  username: bob
+  password: somepass
