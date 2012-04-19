@@ -6,8 +6,7 @@ create table users(
   id integer not null default nextval('user_id_seq'),
   username text unique,
   password text,
-  division text,
-  department text,
+  access_level integer,
   primary key(id)
 );
 
@@ -25,7 +24,7 @@ create or replace function getID(_user text, _pass text)
             return -1;
          else
             if md5(_pass) = rec.password then
-               return rec.id;
+               return rec.access_level;
             else
                return -1;
             end if;
@@ -36,6 +35,6 @@ create or replace function getID(_user text, _pass text)
    language 'plpgsql';
 
 --insert data
-insert into users (username, password, division, department) values ('joshuawc',md5('joshuawc'),'div1','div1');
-insert into users (username, password, division, department) values ('rmortal',md5('rmortal'),'div1','depA');
-insert into users (username, password, division, department) values ('eisonunique',md5('eisonunique'),'div1','depB');
+insert into users (username, password, access_level) values ('joshuawc',md5('joshuawc'), 1);
+insert into users (username, password, access_level) values ('rmortal',md5('rmortal'), 2);
+insert into users (username, password, access_level) values ('eisonunique',md5('eisonunique'), 3);
